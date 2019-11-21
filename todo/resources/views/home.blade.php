@@ -15,6 +15,9 @@
                     @endif
 
                     You are logged in!
+                    <div id="todo">
+                        <example-component></example-component>
+                    </div>
                 </div>
             </div>
         </div>
