@@ -81,7 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel de Jen
+                    Laravel de Jen et Morgane <br>
+                    To Do List - App
                 </div>
 
                 <div class="links">

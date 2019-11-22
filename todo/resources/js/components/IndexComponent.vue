@@ -2,11 +2,11 @@
 
 <template>
   <div>
-    <h1>Posts</h1>
+    <h1>My tasks</h1>
     <div class="row">
       <div class="col-md-10"></div>
       <div class="col-md-2">
-        <router-link :to="{ name: 'create' }" class="btn btn-primary">Create Post</router-link>
+        <router-link :to="{ name: 'create' }" class="btn btn-primary">Create task</router-link>
       </div>
     </div>
     <br />
@@ -15,8 +15,8 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Item Name</th>
-          <th>Item Price</th>
+          <th>Task</th>
+          <th>Details</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -29,13 +29,14 @@
             <router-link :to="{name: 'edit', params: { id: post.id }}" class="btn btn-primary">Edit</router-link>
           </td>
           <td>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" @click.prevent="deletePost(post.id)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -49,6 +50,15 @@ export default {
     this.axios.get(uri).then(response => {
       this.posts = response.data.data;
     });
+  },
+  methods: {
+    deletePost(id) {
+      let uri = `/api/post/delete/${id}`;
+      this.axios.delete(uri).then(response => {
+        this.posts.splice(this.posts.indexOf(id), 1);
+        console.log(this.posts);
+      });
+    }
   }
 };
 </script>
