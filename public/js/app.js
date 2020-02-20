@@ -1917,10 +1917,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      post: {}
+      post: {},
+      error: {
+        title: "",
+        body: "",
+        errorClass: ""
+      }
     };
   },
   methods: {
@@ -1928,10 +1945,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var uri = "/api/post/create";
-      this.axios.post(uri, this.post).then(function (response) {
-        _this.$router.push({
-          name: "posts"
-        });
+      this.axios.post(uri, this.post).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.error) {
+          _this.error.errorClass = "is-invalid";
+          _this.error.title = data.error.title[0];
+          _this.error.body = data.error.body[0];
+        } else {
+          _this.$router.push({
+            name: "posts"
+          });
+        }
       });
     }
   }
@@ -38173,6 +38198,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: [_vm.error.errorClass],
                 attrs: { type: "text" },
                 domProps: { value: _vm.post.title },
                 on: {
@@ -38183,7 +38209,11 @@ var render = function() {
                     _vm.$set(_vm.post, "title", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.error.title))
+              ])
             ])
           ])
         ]),
@@ -38203,6 +38233,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: [_vm.error.errorClass],
                 attrs: { rows: "5" },
                 domProps: { value: _vm.post.body },
                 on: {
@@ -38213,7 +38244,11 @@ var render = function() {
                     _vm.$set(_vm.post, "body", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.error.title))
+              ])
             ])
           ])
         ]),
@@ -54041,8 +54076,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/becode/Documents/Exercices BeCode/Laravel-projects/todolist/todo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/becode/Documents/Exercices BeCode/Laravel-projects/todolist/todo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/becode/Documents/Projects/todolist/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/becode/Documents/Projects/todolist/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

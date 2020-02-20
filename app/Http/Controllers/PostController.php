@@ -5,6 +5,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PostCollection;
 use App\Post;
 
@@ -12,14 +13,25 @@ class PostController extends Controller
 {
     public function store(Request $request)
     {
-      $post = new Post([
-        'title' => $request->get('title'),
-        'body' => $request->get('body')
-      ]);
+      $validator = Validator::make($request->all(), [
+        'title' => 'required|between:5,30',
+        'body' => 'required',
+    ]);
 
-      $post->save();
+    if ($validator->fails()) {
+      return response()->json(['error' => $validator->errors()]);
+  }
+  else {
+    $post = new Post([
+      'title' => $request->get('title'),
+      'body' => $request->get('body')
+    ]);
 
-      return response()->json('successfully added');
+    $post->save();
+
+    return response()->json(['succes'=>'successfully added']);
+  }
+     
     }
 
     public function index()
